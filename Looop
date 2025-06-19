@@ -1,0 +1,11 @@
+public class Looop {
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        int n = 0;
+        sc.close();
+
+        do {
+            System.out.println("Hie guyssss!");
+        } while (n < 11);
+    }
+}
