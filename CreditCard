@@ -1,0 +1,84 @@
+import java.util.Scanner;
+
+public class CreditCard {
+    private String cardHolder;
+    private String cardNumber;
+    private double balance;
+    private final double limit = 50000.0;
+
+    public CreditCard(String cardHolder, String cardNumber) {
+        this.cardHolder = cardHolder;
+        this.cardNumber = cardNumber;
+        this.balance = limit;
+    }
+
+    public void makePurchase(double amount) {
+        if (amount <= balance) {
+            balance -= amount;
+            System.out.println("Purchase successful! Remaining balance: ₹" + balance);
+        } else {
+            System.out.println("Insufficient credit limit!");
+        }
+    }
+
+    public void repay(double amount) {
+        if (balance + amount <= limit) {
+            balance += amount;
+            System.out.println("Repayment successful! New balance: ₹" + balance);
+        } else {
+            System.out.println("Cannot exceed credit limit.");
+        }
+    }
+
+    public void displayInfo() {
+        System.out.println("\n--- Card Details ---");
+        System.out.println("Cardholder: " + cardHolder);
+        System.out.println("Card Number: " + cardNumber);
+        System.out.println("Available Balance: ₹" + balance);
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter Cardholder Name: ");
+        String name = sc.nextLine();
+        System.out.print("Enter Card Number: ");
+        String number = sc.nextLine();
+
+        CreditCard card = new CreditCard(name, number);
+
+        int choice;
+        do {
+            System.out.println("\n--- Credit Card Menu ---");
+            System.out.println("1. Make Purchase");
+            System.out.println("2. Repay Amount");
+            System.out.println("3. View Card Info");
+            System.out.println("0. Exit");
+            System.out.print("Enter your choice: ");
+            choice = sc.nextInt();
+
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter purchase amount: ₹");
+                    double purchase = sc.nextDouble();
+                    card.makePurchase(purchase);
+                    break;
+                case 2:
+                    System.out.print("Enter repayment amount: ₹");
+                    double repay = sc.nextDouble();
+                    card.repay(repay);
+                    break;
+                case 3:
+                    card.displayInfo();
+                    break;
+                case 0:
+                    System.out.println("Exiting program. Thank you!");
+                    break;
+                default:
+                    System.out.println("Invalid choice!");
+            }
+        } while (choice != 0);
+
+        sc.close();
+    }
+}
