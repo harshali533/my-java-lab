@@ -1,0 +1,47 @@
+import java.util.Scanner;
+
+class Student {
+    String name;
+    int rollNo;
+
+    void setData(String name, int rollNo) {
+        this.name = name;
+        this.rollNo = rollNo;
+    }
+
+    void displayData() {
+        System.out.println("Name: " + name);
+        System.out.println("Roll No: " + rollNo);
+    }
+}
+
+public class StudentDetails {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("How many students? ");
+        int n = sc.nextInt();
+        sc.nextLine();
+
+        Student[] students = new Student[n];
+
+        for (int i = 0; i < n; i++) {
+            students[i] = new Student();
+
+            System.out.println("\nEnter details of student " + (i + 1));
+            System.out.print("Name: ");
+            String name = sc.nextLine();
+            System.out.print("Roll No: ");
+            int roll = sc.nextInt();
+            sc.nextLine();
+
+            students[i].setData(name, roll);
+        }
+
+        System.out.println("\n--- Student Details ---");
+        for (int i = 0; i < n; i++) {
+            System.out.println("\nStudent " + (i + 1));
+            students[i].displayData();
+        }
+    }
+}
